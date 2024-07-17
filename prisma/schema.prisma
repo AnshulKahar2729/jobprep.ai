@@ -12,3 +12,72 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id          String       @id @default(cuid())
+  email       String       @unique
+  firstName   String?
+  lastName    String?
+  password    String
+  bio         String?
+  skills      String[]
+  education   Education[]
+  experience  Experience[]
+  resumeUrl   String?
+  linkedInUrl String?
+  githubUrl   String?
+  xUrl        String?
+  role        UserRole     @default(JOB_SEEKER)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  appliedJobs Job[]
+}
+
+enum UserRole {
+  JOB_SEEKER
+  EMPLOYER
+}
+
+model Education {
+  id          String    @id @default(cuid())
+  userId      String    @default(cuid())
+  institution String
+  degree      String
+  completion  DateTime?
+  user        User      @relation(fields: [userId], references: [id])
+}
+
+model Experience {
+  id          String    @id @default(cuid())
+  userId      String    @default(cuid())
+  company     String
+  position    String
+  description String?
+  startDate   DateTime?
+  endDate     DateTime?
+  user        User      @relation(fields: [userId], references: [id])
+}
+
+model Job {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  company     String
+  location    String
+  salary      Int
+  skills      String[]
+  experience  String
+  type        JobType
+  applicants  User[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum JobType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  TEMPORARY
+  INTERNSHIP
+  REMOTE
+}
