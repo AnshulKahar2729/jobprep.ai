@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-const page = () => {
+const Page = () => {
   const pathname = usePathname();
   return (
     <div className="max-w-screen-2xl mx-auto flex flex-col gap-4">
@@ -43,4 +43,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

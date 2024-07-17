@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const page = () => {
+const Page = () => {
   return (
     <div className="max-w-screen-2xl mx-auto flex flex-col gap-4">
       <h2 className=" text-4xl font-semibold">Search for jobs</h2>
@@ -44,4 +44,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
