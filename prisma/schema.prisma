@@ -14,8 +14,8 @@ datasource db {
 }
 
 model User {
-  id          String       @id @default(cuid())
-  email       String       @unique
+  id          String        @id @default(cuid())
+  email       String        @unique
   firstName   String?
   lastName    String?
   password    String
@@ -27,10 +27,12 @@ model User {
   linkedInUrl String?
   githubUrl   String?
   xUrl        String?
-  role        UserRole     @default(JOB_SEEKER)
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  appliedJobs Job[]
+  role        UserRole      @default(JOB_SEEKER)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  AppliedJobs AppliedJob[]
+  Job         Job?          @relation(fields: [jobId], references: [id])
+  jobId       String?
 }
 
 enum UserRole {
@@ -59,7 +61,7 @@ model Experience {
 }
 
 model Job {
-  id          String   @id @default(cuid())
+  id          String        @id @default(cuid())
   title       String
   description String
   company     String
@@ -69,8 +71,9 @@ model Job {
   experience  String
   type        JobType
   applicants  User[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  AppliedJobs AppliedJob[]
 }
 
 enum JobType {
@@ -80,4 +83,13 @@ enum JobType {
   TEMPORARY
   INTERNSHIP
   REMOTE
+}
+
+model AppliedJob {
+  id        String   @id @default(cuid())
+  userId    String
+  jobId     String
+  user      User     @relation(fields: [userId], references: [id])
+  job       Job      @relation(fields: [jobId], references: [id])
+  createdAt DateTime @default(now())
 }

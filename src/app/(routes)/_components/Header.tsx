@@ -10,7 +10,7 @@ import Link from "next/link";
 const Header = () => {
   return (
     <header
-      className="z-[50] bg-[#FBFDFF] py-2 px-5  shadow-sm border-b border-b-gray-300 flex flex-row justify-between items-center 
+      className="z-[50] bg-[#FBFDFF] py-2 px-5  shadow-sm border-b border-b-gray-300 flex flex-row justify-between items-center sticky top-0 
     "
     >
       <span className="text-blue-700 font-bold text-2xl font-sans tracking-wider">

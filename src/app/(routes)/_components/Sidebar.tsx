@@ -41,9 +41,14 @@ const navLinks = [
 
 const Sidebar = () => {
   return (
-    <div className="shadow-sm border-r border-r-gray-300 py-4 px-4 flex-1 flex flex-col bg-[#FBFDFF]">
+    <div className="shadow-sm border-r border-r-gray-300 py-4 px-4 flex-1 flex flex-col bg-[#FBFDFF] sticky top-[67px] h-[calc(100vh-67px)]">
       {navLinks.map((item) => (
-        <NavItem href={item.href} key={item.label} label={item.label} icon={item.icon} />
+        <NavItem
+          href={item.href}
+          key={item.label}
+          label={item.label}
+          icon={item.icon}
+        />
       ))}
     </div>
   );
